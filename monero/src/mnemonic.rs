@@ -140,6 +140,11 @@ impl<N: MoneroNetwork, W: MoneroWordlist> Mnemonic for MoneroMnemonic<N, W> {
     fn to_address(&self, _: Option<&str>, _: &Self::Format) -> Result<Self::Address, MnemonicError> {
         Ok(self.to_private_key(None)?.to_address(&MoneroFormat::Standard)?)
     }
+
+    /// Returns the seed entropy of the corresponding mnemonic.
+    fn entropy(&self) -> &[u8] {
+        &self.seed
+    }
 }
 
 impl<N: MoneroNetwork, W: MoneroWordlist> MoneroMnemonic<N, W> {

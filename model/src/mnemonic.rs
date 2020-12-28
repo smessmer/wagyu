@@ -36,6 +36,9 @@ pub trait Mnemonic: Clone + Debug + Display + FromStr + Send + Sync + 'static + 
 
     /// Returns the address of the corresponding mnemonic.
     fn to_address(&self, password: Option<&str>, format: &Self::Format) -> Result<Self::Address, MnemonicError>;
+
+    /// Returns the entropy of the corresponding mnemonic.
+    fn entropy(&self) -> &[u8];
 }
 
 /// The interface for a generic mnemonic for extended keys.

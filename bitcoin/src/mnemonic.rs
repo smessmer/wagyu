@@ -159,6 +159,11 @@ impl<N: BitcoinNetwork, W: BitcoinWordlist> Mnemonic for BitcoinMnemonic<N, W> {
     fn to_address(&self, password: Option<&str>, format: &Self::Format) -> Result<Self::Address, MnemonicError> {
         Ok(self.to_extended_private_key(password)?.to_address(format)?)
     }
+
+    /// Returns the seed entropy of the corresponding mnemonic.
+    fn entropy(&self) -> &[u8] {
+        &self.entropy
+    }
 }
 
 impl<N: BitcoinNetwork, W: BitcoinWordlist> MnemonicExtended for BitcoinMnemonic<N, W> {
